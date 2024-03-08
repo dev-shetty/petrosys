@@ -30,8 +30,7 @@ CREATE TABLE INVOICE (
     quantity NUMERIC NOT NULL,
     fuel_type TEXT NOT NULL,
     fuel_price NUMERIC(8, 2) NOT NULL,
-    -- Automatically calculates and stores the total amount of fuel purchased
-    total NUMERIC(10, 2) GENERATED ALWAYS AS (quantity * fuel_price) STORED, 
+    total NUMERIC(10, 2) NOT NULL, 
     method TEXT NOT NULL,
     date DATE NOT NULL
 );
@@ -70,10 +69,10 @@ INSERT INTO CUSTOMER (id, phone, method, date) VALUES ('CST003UV', '9876543210',
 INSERT INTO CUSTOMER (id, phone, method, date) VALUES ('CST004WX', '9873216540' , 'Cash', '2024-03-04');
 
 -- Inserting into INVOICE table
-INSERT INTO INVOICE (id, customer_phone, branch_id, quantity, fuel_type, fuel_price, method, date) VALUES ('INV001YZ', '7894561230', 'BRC001AB', 10, 'Petrol', 85.50, 'Cash', '2024-03-01');
-INSERT INTO INVOICE (id, customer_phone, branch_id, quantity, fuel_type, fuel_price, method, date) VALUES ('INV002AB', '9873216540', 'BRC002CD', 8, 'Diesel', 78.20, 'Cash', '2024-03-02');
-INSERT INTO INVOICE (id, customer_phone, branch_id, quantity, fuel_type, fuel_price, method, date) VALUES ('INV003CD', '7894561230', 'BRC003EF', 12, 'Petrol', 85.50, 'Card', '2024-03-03');
-INSERT INTO INVOICE (id, customer_phone, branch_id, quantity, fuel_type, fuel_price, method, date) VALUES ('INV004EF', '9876543210', 'BRC004GH', 15, 'Diesel', 78.20, 'UPI', '2024-03-04');
+INSERT INTO INVOICE (id, customer_phone, branch_id, quantity, fuel_type, fuel_price, total, method, date) VALUES ('INV001YZ', '7894561230', 'BRC001AB', 10, 'Petrol', 85.50, '855', 'Cash', '2024-03-01');
+INSERT INTO INVOICE (id, customer_phone, branch_id, quantity, fuel_type, fuel_price, total, method, date) VALUES ('INV002AB', '9873216540', 'BRC002CD', 8, 'Diesel', 78.20, '625.6', 'Cash', '2024-03-02');
+INSERT INTO INVOICE (id, customer_phone, branch_id, quantity, fuel_type, fuel_price, total, method, date) VALUES ('INV003CD', '7894561230', 'BRC003EF', 12, 'Petrol', 85.50, '1026', 'Card', '2024-03-03');
+INSERT INTO INVOICE (id, customer_phone, branch_id, quantity, fuel_type, fuel_price, total, method, date) VALUES ('INV004EF', '9876543210', 'BRC004GH', 15, 'Diesel', 78.20, '1173', 'UPI', '2024-03-04');
 
 -- Inserting into SALES table
 INSERT INTO SALES (id, branch_id, total_sales, total_stock, date) VALUES ('SAL001AB', 'BRC001AB', 2000.00, 500.00, '2024-03-01');

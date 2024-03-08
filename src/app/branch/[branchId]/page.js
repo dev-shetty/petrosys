@@ -14,16 +14,9 @@ export default async function BranchPage({ params }) {
   const { branchId } = params
 
   const branch = await getBranchById(branchId)
-  console.log(branch)
-
   const employees = await getEmployeesByBranch(branchId)
-  console.log(employees)
-
   const invoices = await getInvoicesByBranch(branchId)
-  console.log(invoices)
-
   const sales = await getSalesByBranch(branchId)
-  console.log(sales)
 
   return (
     <main className="container mx-auto flex min-h-screen flex-col gap-8 py-12">

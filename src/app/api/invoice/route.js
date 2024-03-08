@@ -5,7 +5,13 @@ export async function POST(req) {
   const body = await req.json()
   console.log(body)
 
-  const invoice = await createInvoice(body)
+  try {
+    const invoice = await createInvoice(body)
 
-  return NextResponse.json({ invoice })
+    if (invoice) {
+      return NextResponse.json({ success: true, invoice })
+    }
+  } catch (error) {
+    return NextResponse.json({ success: false, error })
+  }
 }

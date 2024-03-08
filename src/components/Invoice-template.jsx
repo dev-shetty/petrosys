@@ -1,5 +1,4 @@
 "use client"
-import { createInvoice } from "@/app/actions"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -20,10 +19,15 @@ import {
 } from "@/components/ui/select"
 import { FUEL_TYPES, PAYMENT_METHODS } from "@/lib/constants"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 export default function InvoiceTemplate({ branchId, invoiceId }) {
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
+
   const invoiceSchema = z.object({
     customer_phone: z.string().length(10),
     method: z.enum(PAYMENT_METHODS.map((method) => method.toLowerCase())),
@@ -42,6 +46,7 @@ export default function InvoiceTemplate({ branchId, invoiceId }) {
   })
 
   async function submitInvoice(data) {
+    setLoading(true)
     const invoiceData = {
       id: invoiceId,
       branch_id: branchId,
@@ -49,19 +54,27 @@ export default function InvoiceTemplate({ branchId, invoiceId }) {
       quantity: Number(fuelQuantity),
       fuel_type: data.fuel_type,
       fuel_price: data.fuel_price,
+      total: totalAmount,
       method: data.method,
     }
 
-    const response = await fetch("/api/invoice", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(invoiceData),
-    })
-    const invoice = await response.json()
-
-    console.log(invoice)
+    try {
+      const response = await fetch("/api/invoice", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(invoiceData),
+      })
+      const invoice = await response.json()
+      console.log(invoice)
+      router.refresh()
+      router.push(`/branch/${branchId}`)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   const fuelType = form.watch("fuel_type")
@@ -193,7 +206,9 @@ export default function InvoiceTemplate({ branchId, invoiceId }) {
             </FormItem>
           )}
         />
-        <Button type="submit">Process Billing</Button>
+        <Button type="submit">
+          {loading ? "Processing..." : "Process Billing"}
+        </Button>
       </form>
     </Form>
   )
