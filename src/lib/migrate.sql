@@ -1,8 +1,8 @@
-DROP TABLE IF EXISTS BRANCH;
-DROP TABLE IF EXISTS EMPLOYEE;
-DROP TABLE IF EXISTS CUSTOMER;
-DROP TABLE IF EXISTS INVOICE;
-DROP TABLE IF EXISTS SALES;
+DROP TABLE IF EXISTS BRANCH CASCADE;
+DROP TABLE IF EXISTS EMPLOYEE CASCADE;
+DROP TABLE IF EXISTS CUSTOMER CASCADE;
+DROP TABLE IF EXISTS INVOICE CASCADE;
+DROP TABLE IF EXISTS SALES CASCADE;
 
 
 CREATE TABLE BRANCH (
@@ -34,16 +34,18 @@ CREATE TABLE INVOICE (
     branch_id varchar(8) REFERENCES BRANCH(id) ON DELETE SET NULL,
     quantity NUMERIC NOT NULL,
     fuel_type TEXT NOT NULL,
-    fuel_price NUMERIC(8, 2) NOT NULL
-    date DATE NOT NULL,
+    fuel_price NUMERIC(8, 2) NOT NULL,
+    -- Automatically calculates and stores the total amount of fuel purchased
+    total NUMERIC(10, 2) GENERATED ALWAYS AS (quantity * fuel_price) STORED, 
+    date DATE NOT NULL
 );
 
-CREATE TABLE SALES(
-    id SERIAL PRIMARY KEY,
+CREATE TABLE SALES (
+    id varchar(8) PRIMARY KEY,
     branch_id VARCHAR(8) REFERENCES BRANCH(id) ON DELETE SET NULL,
     total_sales NUMERIC(10, 2) NOT NULL,
-    total_stock NUMERIC(10, 2) NOT NULL,
-    date DATE NOT NULL,
+    total_stock NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
+    date DATE NOT NULL
 );
 
 -- Inserting into BRANCH table
@@ -71,7 +73,7 @@ INSERT INTO INVOICE (id, customer_id, branch_id, quantity, fuel_type, fuel_price
 INSERT INTO INVOICE (id, customer_id, branch_id, quantity, fuel_type, fuel_price, date) VALUES ('INV004EF', 'CST004WX', 'BRC004GH', 15, 'Diesel', 78.20, '2024-03-04');
 
 -- Inserting into SALES table
-INSERT INTO SALES (branch_id, total_sales, total_stock, date) VALUES ('BRC001AB', 2000.00, 500.00, '2024-03-01');
-INSERT INTO SALES (branch_id, total_sales, total_stock, date) VALUES ('BRC002CD', 1500.00, 400.00, '2024-03-02');
-INSERT INTO SALES (branch_id, total_sales, total_stock, date) VALUES ('BRC003EF', 1800.00, 600.00, '2024-03-03');
-INSERT INTO SALES (branch_id, total_sales, total_stock, date) VALUES ('BRC004GH', 2200.00, 700.00, '2024-03-04');
+INSERT INTO SALES (id, branch_id, total_sales, total_stock, date) VALUES ('SAL001AB', 'BRC001AB', 2000.00, 500.00, '2024-03-01');
+INSERT INTO SALES (id, branch_id, total_sales, total_stock, date) VALUES ('SAL002CD', 'BRC002CD', 1500.00, 400.00, '2024-03-02');
+INSERT INTO SALES (id, branch_id, total_sales, total_stock, date) VALUES ('SAL003EF', 'BRC003EF', 1800.00, 600.00, '2024-03-03');
+INSERT INTO SALES (id, branch_id, total_sales, total_stock, date) VALUES ('SAL004GH', 'BRC004GH', 2200.00, 700.00, '2024-03-04');
