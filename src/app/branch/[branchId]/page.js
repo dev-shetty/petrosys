@@ -6,6 +6,9 @@ import {
 } from "@/app/actions"
 import { Button } from "@/components/ui/button"
 import { H1, H2 } from "@/components/ui/typography"
+import { LENGTH_OF_ID } from "@/lib/constants"
+import { generate_nanoId } from "@/lib/utils"
+import Link from "next/link"
 
 export default async function BranchPage({ params }) {
   const { branchId } = params
@@ -31,7 +34,16 @@ export default async function BranchPage({ params }) {
             <p>{branch.owner} | </p>
             <p>{branch.address}</p>
           </div>
-          <Button>Create a new Invoice</Button>
+          <Button asChild>
+            <Link
+              href={`/branch/${branchId}/${generate_nanoId(
+                LENGTH_OF_ID,
+                "INV"
+              )}`}
+            >
+              Create a new Invoice
+            </Link>
+          </Button>
         </div>
       </div>
       <div>

@@ -1,7 +1,6 @@
 import { getBranches } from "@/app/actions"
 import { BranchSelect } from "@/components/branch-select"
 import { H1 } from "@/components/ui/typography"
-import Image from "next/image"
 
 export default async function Home() {
   const branches = await getBranches()
