@@ -10,6 +10,8 @@ import {
   getSalesByBranch,
 } from "../../actions"
 
+export const dynamic = "force-dynamic"
+
 export default async function BranchPage({ params }) {
   const { branchId } = params
 
@@ -18,8 +20,11 @@ export default async function BranchPage({ params }) {
   const invoices = await getInvoicesByBranch(branchId)
   const sales = await getSalesByBranch(branchId)
 
-  return (
+  return branch ? (
     <main className="container mx-auto flex min-h-screen flex-col gap-8 py-12">
+      <Button className="absolute left-4 top-4 w-fit" asChild>
+        <Link href="/">Back</Link>
+      </Button>
       <div className="flex flex-col gap-2 w-full border-b pb-2">
         <H1>{branch.name} Dashboard</H1>
         <div className="flex justify-between text-xl">
@@ -40,8 +45,13 @@ export default async function BranchPage({ params }) {
         </div>
       </div>
       <div>
-        <H2>Employees</H2>
-        <div className="grid grid-cols-3">
+        <div className="flex justify-between">
+          <H2>Employees</H2>
+          <Button variant="secondary" asChild>
+            <Link href={`/branch/${branchId}/employee/new`}>+ Employee</Link>
+          </Button>
+        </div>
+        <div className="grid gap-2 grid-cols-3">
           {employees.map((employee) => (
             <div
               key={employee.id}
@@ -58,7 +68,7 @@ export default async function BranchPage({ params }) {
       </div>
       <div>
         <H2>Sales</H2>
-        <div className="grid grid-cols-4">
+        <div className="grid gap-2 grid-cols-4">
           {sales.map((sale) => (
             <div key={sale.id} className="flex flex-col border p-2 rounded-md">
               <div>
@@ -79,7 +89,7 @@ export default async function BranchPage({ params }) {
       </div>
       <div>
         <H2>Invoices</H2>
-        <div className="grid grid-cols-2">
+        <div className="grid gap-2 grid-cols-2">
           {invoices.map((invoice) => (
             <div
               key={invoice.id}
@@ -99,5 +109,7 @@ export default async function BranchPage({ params }) {
         </div>
       </div>
     </main>
+  ) : (
+    <H1>Incorrect Branch ID</H1>
   )
 }

@@ -14,7 +14,7 @@ import {
 } from "./ui/select"
 
 export function BranchSelect({ branches }) {
-  const [branchId, setBranchId] = React.useState(null)
+  const [branchId, setBranchId] = React.useState(branches[0].id)
   console.log(branchId)
   return (
     <div className="flex flex-col gap-6">

@@ -1,5 +1,7 @@
 "use server"
 
+import { LENGTH_OF_ID } from "../lib/constants"
+import { generate_nanoId } from "../lib/utils"
 import { pool } from "./db"
 
 export async function getBranches() {
@@ -90,6 +92,31 @@ export async function getEmployeesByBranch(id) {
     [id]
   )
   return rows
+}
+
+export async function createNewBranch({ id, name, owner, address }) {
+  const { rows } = await pool.query(
+    "INSERT INTO branch (id, name, owner, address) VALUES ($1, $2, $3, $4) RETURNING *",
+    [id, name, owner, address]
+  )
+  return rows[0]
+}
+
+export async function createNewEmployee({
+  branch_id,
+  dob,
+  salary,
+  name,
+  address,
+  phone,
+}) {
+  const id = generate_nanoId(LENGTH_OF_ID, "EMP")
+
+  const { rows } = await pool.query(
+    "INSERT INTO employee (id, branch_id, name, address, phone, dob, salary) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+    [id, branch_id, name, address, phone, dob, salary]
+  )
+  return rows[0]
 }
 
 export async function updateSales(id, date) {
