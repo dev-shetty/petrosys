@@ -1,5 +1,11 @@
 "use client"
-import { Button } from "@/components/ui/button"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+import { FUEL_TYPES, PAYMENT_METHODS } from "../lib/constants"
+import { Button } from "./ui/button"
 import {
   Form,
   FormControl,
@@ -7,8 +13,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+} from "./ui/form"
+import { Input } from "./ui/input"
 import {
   Select,
   SelectContent,
@@ -16,13 +22,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { FUEL_TYPES, PAYMENT_METHODS } from "@/lib/constants"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
+} from "./ui/select"
 
 export default function InvoiceTemplate({ branchId, invoiceId }) {
   const router = useRouter()

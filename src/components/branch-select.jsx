@@ -2,7 +2,8 @@
 
 import * as React from "react"
 
-import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import { Button } from "./ui/button"
 import {
   Select,
   SelectContent,
@@ -10,8 +11,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import Link from "next/link"
+} from "./ui/select"
 
 export function BranchSelect({ branches }) {
   const [branchId, setBranchId] = React.useState(null)

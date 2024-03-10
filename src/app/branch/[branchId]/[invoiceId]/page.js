@@ -1,6 +1,6 @@
-import { getBranchById } from "@/app/actions"
-import InvoiceTemplate from "@/components/Invoice-template"
-import { H1 } from "@/components/ui/typography"
+import InvoiceTemplate from "../../../../components/Invoice-template"
+import { H1 } from "../../../../components/ui/typography"
+import { getBranchById } from "../../../actions"
 
 export default async function InvoicePage({ params }) {
   const { branchId, invoiceId } = params

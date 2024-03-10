@@ -1,14 +1,14 @@
+import Link from "next/link"
+import { Button } from "../../../components/ui/button"
+import { H1, H2 } from "../../../components/ui/typography"
+import { LENGTH_OF_ID } from "../../../lib/constants"
+import { generate_nanoId } from "../../../lib/utils"
 import {
   getBranchById,
   getEmployeesByBranch,
   getInvoicesByBranch,
   getSalesByBranch,
-} from "@/app/actions"
-import { Button } from "@/components/ui/button"
-import { H1, H2 } from "@/components/ui/typography"
-import { LENGTH_OF_ID } from "@/lib/constants"
-import { generate_nanoId } from "@/lib/utils"
-import Link from "next/link"
+} from "../../actions"
 
 export default async function BranchPage({ params }) {
   const { branchId } = params

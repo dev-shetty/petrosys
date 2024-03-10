@@ -1,6 +1,6 @@
-import { getBranches } from "@/app/actions"
-import { BranchSelect } from "@/components/branch-select"
-import { H1 } from "@/components/ui/typography"
+import { BranchSelect } from "../components/branch-select"
+import { H1 } from "../components/ui/typography"
+import { getBranches } from "./actions"
 
 export default async function Home() {
   const branches = await getBranches()

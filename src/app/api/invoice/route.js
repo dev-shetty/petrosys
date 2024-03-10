@@ -1,5 +1,5 @@
-import { createInvoice } from "@/app/actions"
 import { NextResponse } from "next/server"
+import { createInvoice } from "../../actions"
 
 export async function POST(req) {
   const body = await req.json()

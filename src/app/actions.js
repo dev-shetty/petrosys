@@ -1,6 +1,6 @@
 "use server"
 
-import { pool } from "@/app/db/action"
+import { pool } from "./db"
 
 export async function getBranches() {
   const { rows } = await pool.query("SELECT * FROM branch")

@@ -61,6 +61,15 @@ INSERT INTO EMPLOYEE (id, branch_id, salary, name, address, phone, dob) VALUES (
 INSERT INTO EMPLOYEE (id, branch_id, salary, name, address, phone, dob) VALUES ('EMP002KL', 'BRC002CD', 25000.00, 'Priya Shetty', 'Puttur, Karnataka', '8765432109', '1993-08-25');
 INSERT INTO EMPLOYEE (id, branch_id, salary, name, address, phone, dob) VALUES ('EMP003MN', 'BRC003EF', 28000.00, 'Umesh Nayak', 'Mulky, Karnataka', '7654321098', '1985-11-10');
 INSERT INTO EMPLOYEE (id, branch_id, salary, name, address, phone, dob) VALUES ('EMP004OP', 'BRC004GH', 32000.00, 'Vijaya Bhat', 'Udupi, Karnataka', '6543210987', '1988-03-20');
+INSERT INTO EMPLOYEE (id, branch_id, salary, name, address, phone, dob) VALUES ('EMP005QR', 'BRC001AB', 28000.00, 'Ramesh Kumar', 'Mangalore, Karnataka', '9876543201', '1992-09-12');
+INSERT INTO EMPLOYEE (id, branch_id, salary, name, address, phone, dob) VALUES ('EMP006ST', 'BRC001AB', 26000.00, 'Anusha Pai', 'Mangalore, Karnataka', '8765432102', '1995-07-18');
+INSERT INTO EMPLOYEE (id, branch_id, salary, name, address, phone, dob) VALUES ('EMP007UV', 'BRC002CD', 27000.00, 'Ganesh Shenoy', 'Puttur, Karnataka', '7654321093', '1991-04-23');
+INSERT INTO EMPLOYEE (id, branch_id, salary, name, address, phone, dob) VALUES ('EMP008WX', 'BRC002CD', 30000.00, 'Deepa Rao', 'Puttur, Karnataka', '6543210984', '1989-11-05');
+INSERT INTO EMPLOYEE (id, branch_id, salary, name, address, phone, dob) VALUES ('EMP009YZ', 'BRC003EF', 29000.00, 'Suresh Shetty', 'Mulky, Karnataka', '5432109876', '1994-02-28');
+INSERT INTO EMPLOYEE (id, branch_id, salary, name, address, phone, dob) VALUES ('EMP010AB', 'BRC003EF', 31000.00, 'Priyanka Rao', 'Mulky, Karnataka', '4321098765', '1990-10-15');
+INSERT INTO EMPLOYEE (id, branch_id, salary, name, address, phone, dob) VALUES ('EMP011CD', 'BRC004GH', 30000.00, 'Manish Kumar', 'Udupi, Karnataka', '3210987654', '1993-03-08');
+INSERT INTO EMPLOYEE (id, branch_id, salary, name, address, phone, dob) VALUES ('EMP012EF', 'BRC004GH', 28000.00, 'Divya Pai', 'Udupi, Karnataka', '2109876543', '1987-08-20');
+
 
 -- Inserting into CUSTOMER table
 INSERT INTO CUSTOMER (id, phone, method, date) VALUES ('CST001QR', '7894561230', 'Cash', '2024-03-01');
